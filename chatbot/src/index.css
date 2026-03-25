@@ -267,6 +267,9 @@ body {
   padding: 18px 16px;
   border: 1.5px solid rgba(108,99,255,0.08);
   cursor: pointer;
+  width: 100%;
+  text-align: left;
+  appearance: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -682,6 +685,161 @@ body {
   text-align: center;
 }
 
+.dashboard-workspace {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: linear-gradient(135deg, #f0f2ff 0%, #e8f0fe 50%, #f3e8ff 100%);
+}
+
+.dashboard-viewer {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.dashboard-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 4;
+  border: 1px solid rgba(108,99,255,0.12);
+  background: rgba(255,255,255,0.9);
+  color: #5b54e8;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(108,99,255,0.12);
+}
+
+.dashboard-iframe-shell {
+  min-height: 0;
+  height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+  border: none;
+  box-shadow: none;
+  background: rgba(255,255,255,0.8);
+}
+
+.dashboard-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+.copilot-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: min(420px, calc(100% - 40px));
+  height: min(620px, calc(100% - 40px));
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(108,99,255,0.1);
+  border-radius: 24px;
+  box-shadow: 0 24px 50px rgba(108,99,255,0.16);
+  z-index: 3;
+  transition: width .2s ease, height .2s ease, transform .2s ease, opacity .2s ease;
+}
+
+.copilot-overlay.is-expanded {
+  width: min(560px, calc(100% - 40px));
+  height: min(760px, calc(100% - 40px));
+}
+
+.copilot-overlay.is-closed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
+.copilot-overlay-header {
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid rgba(108,99,255,0.08);
+  background: rgba(255,255,255,0.5);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.copilot-overlay-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copilot-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(108,99,255,0.12);
+  background: rgba(255,255,255,0.86);
+  color: #6b7095;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.copilot-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(108,99,255,0.08);
+}
+
+.copilot-prompt-btn {
+  border: 1px solid rgba(108,99,255,0.12);
+  background: rgba(255,255,255,0.84);
+  color: #5b54e8;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copilot-messages {
+  padding-top: 18px;
+}
+
+.copilot-input-shell {
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.copilot-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg,#6C63FF,#00D4FF);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 18px 32px rgba(108,99,255,0.22);
+}
+
 @media (max-width: 768px) {
   .grid, .stats-row { grid-template-columns: repeat(2, 1fr); }
   .header { padding: 12px 20px; }
@@ -701,6 +859,25 @@ body {
   .chat-main-header { padding: 16px 18px; }
   .chat-messages { padding: 18px; }
   .chat-input-shell { padding: 14px 18px 18px; }
+  .dashboard-viewer {
+    padding: 0;
+  }
+  .dashboard-back-btn {
+    top: 14px;
+    left: 14px;
+  }
+  .copilot-overlay {
+    top: auto;
+    right: 14px;
+    left: 14px;
+    bottom: 14px;
+    width: auto;
+    height: 52vh;
+  }
+  .copilot-overlay.is-expanded {
+    width: auto;
+    height: 70vh;
+  }
 }
 
 @media (max-width: 480px) {
@@ -713,4 +890,23 @@ body {
     border-radius: 0;
   }
   .new-chat-btn { display: none; }
+  .dashboard-viewer {
+    padding: 10px;
+  }
+  .copilot-overlay {
+    right: 10px;
+    left: 10px;
+    bottom: 10px;
+    width: auto;
+    height: 58vh;
+    border-radius: 20px;
+  }
+  .dashboard-back-btn {
+    top: 10px;
+    left: 10px;
+  }
+  .copilot-overlay-header,
+  .copilot-input-shell {
+    border-radius: 0;
+  }
 }
