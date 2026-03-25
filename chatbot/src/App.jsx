@@ -13,10 +13,10 @@ const modules = [
 ];
 
 const stats = [
-  { value:"8",         label:"AI Modules",       cls:"" },
-  { value:"24/7",      label:"Active Monitoring", cls:"" },
-  { value:"Real-time", label:"Data Processing",   cls:"realtime" },
-  { value:"99.9%",     label:"Accuracy Rate",     cls:"" },
+  { value:"8", label:"AI Modules", cls:"" },
+  { value:"24/7", label:"Active Monitoring", cls:"" },
+  { value:"Real-time", label:"Data Processing", cls:"realtime" },
+  { value:"99.9%", label:"Accuracy Rate", cls:"" },
 ];
 
 const AI_REPLIES = [
@@ -25,35 +25,48 @@ const AI_REPLIES = [
   "The STARS analysis indicates a 12% improvement opportunity in the Medicare rating optimization pipeline.",
   "Competitor intelligence shows 3 key players have shifted strategy in the last quarter. Want me to run a detailed comparison?",
   "Real-time market data suggests the winning play is to target underserved B and C tier segments before Q4.",
-  "I've cross-referenced the landscape reports with producer performance metrics — the correlation is significant. Shall I visualize it?",
+  "I've cross-referenced the landscape reports with producer performance metrics and the correlation is significant. Shall I visualize it?",
   "Plan comparison analysis complete. The optimized tier structure could reduce churn by an estimated 18%.",
 ];
 
-/* ── Orbital core SVG decorations ── */
+const dashboardItems = [
+  { name: "Enrollment Overview", detail: "Live forecasting for application, activation, and churn signals." },
+  { name: "Competitor Radar", detail: "Track competitor moves, pricing shifts, and recent market pushes." },
+  { name: "Producer Performance", detail: "Compare producer output, response time, and conversion quality." },
+  { name: "Stars Optimization", detail: "Prioritize the measures with the highest ratings lift potential." },
+];
+
+const starterHistory = [
+  "Q4 market trend summary",
+  "Competitor movement analysis",
+  "Enrollment risk review",
+  "Producer performance snapshot",
+];
+
 function OrbitalCore() {
   const spokes = [0, 45, 90, 135, 180, 225, 270, 315];
+
   return (
     <>
-      {/* Rotating arc segments */}
       <svg className="core-svg" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 55 10 A 45 45 0 0 1 95 38"  stroke="#FFB800" strokeWidth="3" strokeLinecap="round" opacity="0.9"/>
-        <path d="M 90 70 A 45 45 0 0 1 25 85"  stroke="#9B59B6" strokeWidth="3" strokeLinecap="round" opacity="0.9"/>
-        <path d="M 18 40 A 45 45 0 0 1 55 10"  stroke="#00D4FF" strokeWidth="3" strokeLinecap="round" opacity="0.9"/>
+        <path d="M 55 10 A 45 45 0 0 1 95 38" stroke="#FFB800" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+        <path d="M 90 70 A 45 45 0 0 1 25 85" stroke="#9B59B6" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
+        <path d="M 18 40 A 45 45 0 0 1 55 10" stroke="#00D4FF" strokeWidth="3" strokeLinecap="round" opacity="0.9" />
       </svg>
-      {/* Counter-rotating spokes */}
       <svg className="spokes-svg" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="55" cy="55" r="20" fill="none" stroke="#00D4FF" strokeWidth="1" opacity="0.25"/>
-        {spokes.map((angle, i) => {
+        <circle cx="55" cy="55" r="20" fill="none" stroke="#00D4FF" strokeWidth="1" opacity="0.25" />
+        {spokes.map((angle) => {
           const rad = (angle * Math.PI) / 180;
           const x1 = 55 + 22 * Math.cos(rad);
           const y1 = 55 + 22 * Math.sin(rad);
           const x2 = 55 + 38 * Math.cos(rad);
           const y2 = 55 + 38 * Math.sin(rad);
+
           return (
-            <g key={i}>
-              <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#00D4FF" strokeWidth="1.2" opacity="0.65"/>
-              <circle cx={x2} cy={y2} r="3"  fill="#00D4FF" opacity="0.9"/>
-              <circle cx={x2} cy={y2} r="5.5" fill="none" stroke="#00D4FF" strokeWidth="0.8" opacity="0.35"/>
+            <g key={angle}>
+              <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#00D4FF" strokeWidth="1.2" opacity="0.65" />
+              <circle cx={x2} cy={y2} r="3" fill="#00D4FF" opacity="0.9" />
+              <circle cx={x2} cy={y2} r="5.5" fill="none" stroke="#00D4FF" strokeWidth="0.8" opacity="0.35" />
             </g>
           );
         })}
@@ -62,96 +75,176 @@ function OrbitalCore() {
   );
 }
 
-/* ── Chatbot Modal ── */
-function ChatModal({ onClose }) {
-  const [messages, setMessages] = useState([
-    { role:"ai", text:"Hello! I'm your AI Analytics assistant. Ask me anything about market data, enrollment trends, competitor insights, or STARS performance." }
-  ]);
-  const [input,  setInput]  = useState("");
+function ChatWorkspace({ onClose }) {
+  const initialMessage = {
+    role: "ai",
+    text: "Hello! I'm your AI Analytics assistant. Ask me about trends, competitors, dashboards, or performance signals.",
+  };
+
+  const [messages, setMessages] = useState([initialMessage]);
+  const [historyItems, setHistoryItems] = useState(starterHistory);
+  const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
+  const [sidebarView, setSidebarView] = useState("history");
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior:"smooth" });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
-  const sendMessage = async () => {
-    const text = input.trim();
+  const sendMessage = async (presetText) => {
+    const text = (presetText ?? input).trim();
     if (!text) return;
+
     setInput("");
-    setMessages(m => [...m, { role:"user", text }]);
+    setMessages((current) => [...current, { role: "user", text }]);
+    setHistoryItems((current) => [text, ...current.filter((item) => item !== text)].slice(0, 8));
     setTyping(true);
-    await new Promise(r => setTimeout(r, 900 + Math.random() * 700));
+
+    await new Promise((resolve) => setTimeout(resolve, 900 + Math.random() * 700));
     const reply = AI_REPLIES[Math.floor(Math.random() * AI_REPLIES.length)];
     setTyping(false);
-    setMessages(m => [...m, { role:"ai", text: reply }]);
+    setMessages((current) => [...current, { role: "ai", text: reply }]);
   };
 
-  const onKey = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); } };
+  const onKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
+    }
+  };
+
+  const startNewChat = () => {
+    setMessages([initialMessage]);
+    setTyping(false);
+    setInput("");
+  };
 
   return (
-    <div className="chat-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="chat-modal">
-        {/* Header */}
-        <div className="chat-header">
-          <div className="chat-header-left">
-            <div className="chat-avatar">AI</div>
+    <div className="chat-overlay" onClick={(event) => event.target === event.currentTarget && onClose()}>
+      <div className="chat-workspace">
+        <aside className="chat-sidebar">
+          <div className="chat-sidebar-top">
             <div>
-              <div className="chat-title">AI Analytics Assistant</div>
-              <div className="chat-subtitle">● Online · Powered by Advanced Intelligence</div>
+              <div className="sidebar-title">AI Workspace</div>
+              <div className="sidebar-subtitle">Switch between chat history and dashboards</div>
             </div>
+            <button className="chat-close" onClick={onClose} aria-label="Close chat workspace">
+              x
+            </button>
           </div>
-          <button className="chat-close" onClick={onClose}>✕</button>
-        </div>
 
-        {/* Messages */}
-        <div className="chat-messages">
-          {messages.map((m, i) => (
-            <div key={i} className={`msg ${m.role}`}>
-              <div className="msg-avatar">{m.role === "ai" ? "AI" : "U"}</div>
-              <div className="msg-bubble">{m.text}</div>
-            </div>
-          ))}
-          {typing && (
-            <div className="msg ai">
-              <div className="msg-avatar">AI</div>
-              <div className="msg-bubble">
-                <div className="typing-indicator"><span/><span/><span/></div>
+          <div className="sidebar-switcher">
+            <button
+              className={`sidebar-switch-btn ${sidebarView === "history" ? "active" : ""}`}
+              onClick={() => setSidebarView("history")}
+            >
+              History
+            </button>
+            <button
+              className={`sidebar-switch-btn ${sidebarView === "dashboards" ? "active" : ""}`}
+              onClick={() => setSidebarView("dashboards")}
+            >
+              Dashboards
+            </button>
+          </div>
+
+          <div className="sidebar-panel">
+            {sidebarView === "history" ? (
+              <div className="sidebar-list">
+                {historyItems.map((item) => (
+                  <button
+                    key={item}
+                    className="sidebar-item history-item"
+                    onClick={() => sendMessage(item)}
+                  >
+                    <span className="sidebar-item-title">{item}</span>
+                    <span className="sidebar-item-meta">Open in chat</span>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="sidebar-list">
+                {dashboardItems.map((item) => (
+                  <button
+                    key={item.name}
+                    className="sidebar-item dashboard-item"
+                    onClick={() => sendMessage(`Show me the ${item.name} dashboard insights.`)}
+                  >
+                    <span className="sidebar-item-title">{item.name}</span>
+                    <span className="sidebar-item-copy">{item.detail}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </aside>
+
+        <section className="chat-main">
+          <div className="chat-main-header">
+            <div className="chat-header-left">
+              <div className="chat-avatar">AI</div>
+              <div>
+                <div className="chat-title">AI Analytics Assistant</div>
+                <div className="chat-subtitle">Online now · ChatGPT-style workspace</div>
               </div>
             </div>
-          )}
-          <div ref={bottomRef}/>
-        </div>
+            <button className="new-chat-btn" onClick={startNewChat}>
+              New Chat
+            </button>
+          </div>
 
-        {/* Input */}
-        <div className="chat-input-row">
-          <input
-            className="chat-input"
-            placeholder="Ask about analytics, trends, competitors…"
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={onKey}
-            autoFocus
-          />
-          <button className="chat-send" onClick={sendMessage}>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"/>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-          </button>
-        </div>
+          <div className="chat-messages">
+            {messages.map((message, index) => (
+              <div key={`${message.role}-${index}`} className={`msg ${message.role}`}>
+                <div className="msg-avatar">{message.role === "ai" ? "AI" : "U"}</div>
+                <div className="msg-bubble">{message.text}</div>
+              </div>
+            ))}
+
+            {typing && (
+              <div className="msg ai">
+                <div className="msg-avatar">AI</div>
+                <div className="msg-bubble">
+                  <div className="typing-indicator"><span /><span /><span /></div>
+                </div>
+              </div>
+            )}
+            <div ref={bottomRef} />
+          </div>
+
+          <div className="chat-input-shell">
+            <div className="chat-input-row">
+              <textarea
+                className="chat-input"
+                placeholder="Message AI Analytics Assistant..."
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={onKeyDown}
+                rows={1}
+                autoFocus
+              />
+              <button className="chat-send" onClick={() => sendMessage()} aria-label="Send message">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            </div>
+            <div className="chat-input-footnote">Use the left switcher to move between conversation history and dashboards.</div>
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
-/* ── Main App ── */
 export default function App() {
-  const [hovered,  setHovered]  = useState(false);
-  const [clicked,  setClicked]  = useState(false);
-  const [ripples,  setRipples]  = useState([]);
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [ripples, setRipples] = useState([]);
   const [chatOpen, setChatOpen] = useState(false);
-  const rippleId     = useRef(0);
+  const rippleId = useRef(0);
   const clickTimeout = useRef(null);
 
   const handleHubClick = () => {
@@ -160,25 +253,23 @@ export default function App() {
     clickTimeout.current = setTimeout(() => setClicked(false), 600);
 
     const id = rippleId.current++;
-    setRipples(r => [...r, id]);
-    setTimeout(() => setRipples(r => r.filter(x => x !== id)), 1000);
-
+    setRipples((current) => [...current, id]);
+    setTimeout(() => setRipples((current) => current.filter((item) => item !== id)), 1000);
     setTimeout(() => setChatOpen(true), 280);
   };
 
   const sceneClass = ["hub-scene", hovered ? "hovered" : "", clicked ? "clicked" : ""]
-    .filter(Boolean).join(" ");
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div style={{ minHeight:"100vh", background:"linear-gradient(135deg,#f0f2ff 0%,#e8f0fe 50%,#f3e8ff 100%)" }}>
-
-      {/* Header */}
       <header className="header">
         <div className="header-left">
           <div className="logo-box">
             <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-              <circle cx="12" cy="12" r="10" stroke="#6C63FF" strokeWidth="2"/>
-              <path d="M8 12h8M12 8v8" stroke="#6C63FF" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="12" cy="12" r="10" stroke="#6C63FF" strokeWidth="2" />
+              <path d="M8 12h8M12 8v8" stroke="#6C63FF" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
           <div>
@@ -187,12 +278,11 @@ export default function App() {
           </div>
         </div>
         <div className="status-badge">
-          <span className="status-dot"/>
+          <span className="status-dot" />
           System Active
         </div>
       </header>
 
-      {/* Hero */}
       <div className="hero">
         <div
           className={sceneClass}
@@ -200,40 +290,35 @@ export default function App() {
           onMouseLeave={() => setHovered(false)}
           onClick={handleHubClick}
         >
-          {/* Three orbit rings */}
           <div className="orbit-ring ring-1">
-            <div className="ring-dot"/>
-            <div className="ring-dot-2"/>
+            <div className="ring-dot" />
+            <div className="ring-dot-2" />
           </div>
           <div className="orbit-ring ring-2">
-            <div className="ring-dot"/>
+            <div className="ring-dot" />
           </div>
           <div className="orbit-ring ring-3">
-            <div className="ring-dot"/>
+            <div className="ring-dot" />
           </div>
 
-          {/* Click ripples */}
-          {ripples.map(id => <div key={id} className="ripple"/>)}
+          {ripples.map((id) => <div key={id} className="ripple" />)}
 
-          {/* Core */}
           <div className="hub-core">
-            <OrbitalCore/>
+            <OrbitalCore />
             <span className="hub-ai-label">AI</span>
           </div>
-
-          {/* <div className="hub-tooltip">Click to open AI Assistant</div> */}
         </div>
 
         <p className="hero-text">
-          Your intelligent command center for comprehensive analytics, market insights, and strategic<br/>
+          Your intelligent command center for comprehensive analytics, market insights, and strategic
+          <br />
           decision-making across all business dimensions
         </p>
       </div>
 
-      {/* Module Grid */}
       <div className="grid">
-        {modules.map((mod, i) => (
-          <div key={i} className="card">
+        {modules.map((mod) => (
+          <div key={mod.title} className="card">
             <div className="card-icon-box" style={{ background:mod.bg, color:mod.color }}>
               {mod.icon}
             </div>
@@ -245,18 +330,16 @@ export default function App() {
         ))}
       </div>
 
-      {/* Stats */}
       <div className="stats-row">
-        {stats.map((s, i) => (
-          <div key={i} className="stat-card">
-            <div className={`stat-value ${s.cls}`}>{s.value}</div>
-            <div className="stat-label">{s.label}</div>
+        {stats.map((stat) => (
+          <div key={stat.label} className="stat-card">
+            <div className={`stat-value ${stat.cls}`}>{stat.value}</div>
+            <div className="stat-label">{stat.label}</div>
           </div>
         ))}
       </div>
 
-      {/* Chatbot */}
-      {chatOpen && <ChatModal onClose={() => setChatOpen(false)}/>}
+      {chatOpen && <ChatWorkspace onClose={() => setChatOpen(false)} />}
     </div>
   );
 }
