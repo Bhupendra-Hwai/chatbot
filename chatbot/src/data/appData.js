@@ -1,14 +1,15 @@
 export const dashboardUrl = "https://ca-ui.analytics-hub.com/ca/6b2ef24a-3215-445c-9072-9b375485dada5";
+export const planComparisonDashboardUrl = "https://plancomparison-ui-aepmock.analytics-hub.com/pc/user/?userID=/?type=SIDEBAR_DASHBOARD&?userid=296f14be-a05b-40f3-b493-0510273abeeb5";
 
 export const modules = [
-  { iconName: "analytics", color:"#6C63FF", bg:"rgba(108,99,255,0.12)", title:"Competitor Analysis", desc:"Deep insights into market competitors and their strategies" },
-  { iconName: "pulse", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Enrollment Trends", desc:"Real time analysis of enrollment patterns and forecasting" },
-  { iconName: "users", color:"#E67E22", bg:"rgba(230,126,34,0.12)", title:"Market Engagers", desc:"Identify and engage key market segments effectively" },
-  { iconName: "screen", color:"#1ABC9C", bg:"rgba(26,188,156,0.12)", title:"Plan Comparison", desc:"AI powered comparative analysis of insurance plans" },
-  { iconName: "star", color:"#F39C12", bg:"rgba(243,156,18,0.12)", title:"Winning Plays", desc:"Strategic recommendations based on successful patterns" },
-  { iconName: "target", color:"#3498DB", bg:"rgba(52,152,219,0.12)", title:"STARS", desc:"Medicare Star Ratings analysis and optimization" },
-  { iconName: "grid", color:"#E74C3C", bg:"rgba(231,76,60,0.12)", title:"Landscape Reports", desc:"Comprehensive market landscape visualization" },
-  { iconName: "profile", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Producer Insights", desc:"Performance analytics and producer effectiveness metrics" },
+  { iconName: "analytics", color:"#6C63FF", bg:"rgba(108,99,255,0.12)", title:"Competitor Analysis", desc:"Deep insights into market competitors and their strategies", dashboardUrl },
+  { iconName: "pulse", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Enrollment Trends", desc:"Real time analysis of enrollment patterns and forecasting", dashboardUrl },
+  { iconName: "users", color:"#E67E22", bg:"rgba(230,126,34,0.12)", title:"Market Engagers", desc:"Identify and engage key market segments effectively", dashboardUrl },
+  { iconName: "screen", color:"#1ABC9C", bg:"rgba(26,188,156,0.12)", title:"Plan Comparison", desc:"AI powered comparative analysis of insurance plans", dashboardUrl: planComparisonDashboardUrl },
+  { iconName: "star", color:"#F39C12", bg:"rgba(243,156,18,0.12)", title:"Winning Plays", desc:"Strategic recommendations based on successful patterns", dashboardUrl },
+  { iconName: "target", color:"#3498DB", bg:"rgba(52,152,219,0.12)", title:"STARS", desc:"Medicare Star Ratings analysis and optimization", dashboardUrl },
+  { iconName: "grid", color:"#E74C3C", bg:"rgba(231,76,60,0.12)", title:"Landscape Reports", desc:"Comprehensive market landscape visualization", dashboardUrl },
+  { iconName: "profile", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Producer Insights", desc:"Performance analytics and producer effectiveness metrics", dashboardUrl },
 ];
 
 export const stats = [

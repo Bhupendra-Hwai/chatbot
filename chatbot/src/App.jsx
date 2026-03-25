@@ -23,8 +23,17 @@ export default function App() {
   const rippleId = useRef(0);
   const clickTimeout = useRef(null);
 
-  const openDashboard = (dashboardName) => {
-    setSelectedDashboard({ name: dashboardName, url: dashboardUrl });
+  const openDashboard = (dashboard) => {
+    if (typeof dashboard === "string") {
+      setSelectedDashboard({ name: dashboard, url: dashboardUrl });
+      setActiveView("dashboard");
+      return;
+    }
+
+    setSelectedDashboard({
+      name: dashboard.title,
+      url: dashboard.dashboardUrl ?? dashboardUrl,
+    });
     setActiveView("dashboard");
   };
 
@@ -53,7 +62,7 @@ export default function App() {
             onHoverStart={() => setHovered(true)}
             onHoverEnd={() => setHovered(false)}
             onHubClick={handleHubClick}
-            onModuleClick={(module) => openDashboard(module.title)}
+            onModuleClick={openDashboard}
           />
         </>
       )}

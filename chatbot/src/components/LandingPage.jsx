@@ -17,12 +17,14 @@ export default function LandingPage({
     <>
       <div className="hero">
         <HubScene
+          modules={modules}
           hovered={hovered}
           clicked={clicked}
           ripples={ripples}
           onMouseEnter={onHoverStart}
           onMouseLeave={onHoverEnd}
           onClick={onHubClick}
+          onModuleClick={onModuleClick}
         />
 
         <p className="hero-text">
