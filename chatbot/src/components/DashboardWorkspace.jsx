@@ -64,7 +64,7 @@ export default function DashboardWorkspace({
             </div>
 
             <button className="dashboard-back-btn" onClick={onClose} aria-label="Go back to home">
-              ← Back
+              ← Home
             </button>
 
             <button className="chat-close dashboard-close" onClick={onClose} aria-label="Close dashboard workspace">

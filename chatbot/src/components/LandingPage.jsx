@@ -28,9 +28,7 @@ export default function LandingPage({
         />
 
         <p className="hero-text">
-          Your intelligent command center for comprehensive analytics, market insights, and strategic
-          <br />
-          decision-making across all business dimensions
+          Your intelligent command center for comprehensive analytics, market insights, and strategic decision-making across all business dimensions
         </p>
       </div>
 

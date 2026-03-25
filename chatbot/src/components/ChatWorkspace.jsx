@@ -53,7 +53,7 @@ export default function ChatWorkspace({
         <aside className="chat-sidebar">
           <div className="chat-sidebar-top">
             <div>
-              <div className="sidebar-title">AI Workspace</div>
+              <div className="sidebar-title">HWAI ChatBot Workspace</div>
               <div className="sidebar-subtitle">Switch between chat history and dashboards</div>
             </div>
             <button className="chat-close" onClick={onClose} aria-label="Close chat workspace">
@@ -113,7 +113,7 @@ export default function ChatWorkspace({
               <div className="chat-avatar">AI</div>
               <div>
                 <div className="chat-title">AI Analytics Assistant</div>
-                <div className="chat-subtitle">Online now - ChatGPT-style workspace</div>
+                {/* <div className="chat-subtitle">Online now - ChatGPT-style workspace</div> */}
               </div>
             </div>
             <button className="new-chat-btn" onClick={startNewChat}>

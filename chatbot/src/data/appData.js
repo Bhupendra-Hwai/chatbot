@@ -6,17 +6,17 @@ export const modules = [
   { iconName: "pulse", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Enrollment Trends", desc:"Real time analysis of enrollment patterns and forecasting", dashboardUrl },
   { iconName: "users", color:"#E67E22", bg:"rgba(230,126,34,0.12)", title:"Market Engagers", desc:"Identify and engage key market segments effectively", dashboardUrl },
   { iconName: "screen", color:"#1ABC9C", bg:"rgba(26,188,156,0.12)", title:"Plan Comparison", desc:"AI powered comparative analysis of insurance plans", dashboardUrl: planComparisonDashboardUrl },
-  { iconName: "star", color:"#F39C12", bg:"rgba(243,156,18,0.12)", title:"Winning Plays", desc:"Strategic recommendations based on successful patterns", dashboardUrl },
+  { iconName: "star", color:"#F39C12", bg:"rgba(243,156,18,0.12)", title:"Winning Plans", desc:"Strategic recommendations based on successful patterns", dashboardUrl },
   { iconName: "target", color:"#3498DB", bg:"rgba(52,152,219,0.12)", title:"STARS", desc:"Medicare Star Ratings analysis and optimization", dashboardUrl },
-  { iconName: "grid", color:"#E74C3C", bg:"rgba(231,76,60,0.12)", title:"Landscape Reports", desc:"Comprehensive market landscape visualization", dashboardUrl },
+  { iconName: "grid", color:"#E74C3C", bg:"rgba(231,76,60,0.12)", title:"Landscape Report", desc:"Comprehensive market landscape visualization", dashboardUrl },
   { iconName: "profile", color:"#9B59B6", bg:"rgba(155,89,182,0.12)", title:"Producer Insights", desc:"Performance analytics and producer effectiveness metrics", dashboardUrl },
 ];
 
 export const stats = [
-  { value:"8", label:"AI Modules", cls:"" },
-  { value:"24/7", label:"Active Monitoring", cls:"" },
-  { value:"Real-time", label:"Data Processing", cls:"realtime" },
-  { value:"99.9%", label:"Accuracy Rate", cls:"" },
+  // { value:"8", label:"AI Modules", cls:"" },
+  // { value:"24/7", label:"Active Monitoring", cls:"" },
+  // { value:"Real-time", label:"Data Processing", cls:"realtime" },
+  // { value:"99.9%", label:"Accuracy Rate", cls:"" },
 ];
 
 export const aiReplies = [
@@ -30,10 +30,10 @@ export const aiReplies = [
 ];
 
 export const dashboardItems = [
-  { name: "Enrollment Overview", detail: "Live forecasting for application, activation, and churn signals." },
-  { name: "Competitor Radar", detail: "Track competitor moves, pricing shifts, and recent market pushes." },
-  { name: "Producer Performance", detail: "Compare producer output, response time, and conversion quality." },
-  { name: "Stars Optimization", detail: "Prioritize the measures with the highest ratings lift potential." },
+  { name: "Competitor Analysis", detail: "" },
+  { name: "Plan Comparison", detail: "" },
+  { name: "Enrollment Trends", detail: "" },
+  { name: "Winning Plans", detail: "" },
 ];
 
 export const starterHistory = [

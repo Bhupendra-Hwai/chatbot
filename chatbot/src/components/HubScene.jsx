@@ -66,7 +66,7 @@ export default function HubScene({
 
       <div className="hub-core">
         <OrbitalCore />
-        <span className="hub-ai-label">AI</span>
+        <span className="hub-ai-label">HWAI</span>
       </div>
     </div>
   );

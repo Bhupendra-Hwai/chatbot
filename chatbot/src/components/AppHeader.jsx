@@ -8,7 +8,7 @@ export default function AppHeader() {
           <AppLogoIcon />
         </div>
         <div>
-          <div className="brand-name">AI Analytics Platform</div>
+          <div className="brand-name">HWAI ChatBot Platform</div>
           <div className="brand-sub">Powered by Advanced Intelligence</div>
         </div>
       </div>
