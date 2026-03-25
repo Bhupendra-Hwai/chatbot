@@ -1,0 +1,261 @@
+/* 🌟 GLOBAL CLEANUP */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* 🖼 LOGO */
+.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+}
+
+/* 🏠 HOME CONTAINER */
+.home-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #facc15, #fde68a);
+}
+
+/* 🔘 MAIN BUTTON */
+.main-btn {
+  padding: 14px 28px;
+  background: black;
+  color: white;
+  font-size: 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.main-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: #111;
+}
+
+/* 📊 DASHBOARD BUTTONS */
+.btn {
+  padding: 10px 18px;
+  background: white;
+  color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: black;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* 📦 DASHBOARD CONTAINER */
+.dashboard-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 🤖 CHAT CONTAINER */
+.chat-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+}
+
+/* 🔝 TOP BAR */
+.top-bar {
+  padding: 12px 16px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 💬 CHAT AREA */
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* 💬 MESSAGE */
+.message {
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  max-width: 260px;
+}
+
+.user {
+  background: #2563eb;
+  color: white;
+  margin-left: auto;
+}
+
+.bot {
+  background: #e5e7eb;
+}
+
+/* ✏️ INPUT BAR */
+.input-bar {
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+.input-bar input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.input-bar button {
+  padding: 10px 16px;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* 🌐 IFRAME */
+iframe {
+  border: none;
+}
+
+/* 🔝 TOP NAV BAR */
+.top-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eee;
+}
+
+/* NAV BUTTON */
+.nav-btn {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.nav-btn:hover {
+  background: black;
+  color: white;
+}
+
+/* 🏠 CENTER CONTENT */
+.home-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 🤖 CHAT PAGE IMPROVEMENTS */
+.chat-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+}
+
+/* TOP BAR */
+.top-bar {
+  padding: 14px 18px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* DASHBOARD BAR INSIDE CHAT */
+.chat-nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
+  justify-content: center;
+}
+
+/* CHAT AREA */
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MESSAGE STYLE */
+.message {
+  padding: 12px 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  max-width: 300px;
+  font-size: 14px;
+}
+
+/* USER MESSAGE */
+.user {
+  background: #2563eb;
+  color: white;
+  margin-left: auto;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+/* BOT MESSAGE */
+.bot {
+  background: #e5e7eb;
+}
+
+/* INPUT BAR */
+.input-bar {
+  padding: 14px;
+  display: flex;
+  gap: 10px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+.input-bar input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.input-bar button {
+  padding: 12px 18px;
+  background: black;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+}
